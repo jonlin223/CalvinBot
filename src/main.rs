@@ -2,10 +2,14 @@ use std::env;
 
 use serenity::{
     async_trait,
-    framework::{StandardFramework, standard::{macros::{group, command}, CommandResult}},
-    prelude::{EventHandler, GatewayIntents, Context},
-    Client, model::prelude::Message,
+    framework::{standard::macros::group, StandardFramework},
+    prelude::{EventHandler, GatewayIntents},
+    Client,
 };
+
+mod commands;
+
+use crate::commands::ping::*;
 
 struct Handler;
 
@@ -16,19 +20,15 @@ impl EventHandler for Handler {}
 #[commands(ping)]
 struct General;
 
-#[command]
-async fn ping(ctx: &Context, msg: &Message) -> CommandResult {
-    msg.reply(ctx, "Pong!").await?;
-    Ok(())
-}
-
 #[tokio::main]
 async fn main() {
     dotenv::dotenv().expect("Failed to load .env file");
 
-    let framework = StandardFramework::new().configure(|c| c.prefix("!!")).group(&GENERAL_GROUP);
+    let framework = StandardFramework::new()
+        .configure(|c| c.prefix("!!"))
+        .group(&GENERAL_GROUP);
 
-    let token = env::var("TOKEN").expect("token");
+    let token = env::var("TOKEN").expect("Could not find token in .env file");
     let intents = GatewayIntents::non_privileged() | GatewayIntents::MESSAGE_CONTENT;
 
     let mut client = Client::builder(&token, intents)
