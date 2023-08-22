@@ -8,8 +8,10 @@ use serenity::{
 };
 
 mod commands;
+mod scrapers;
 
 use crate::commands::ping::*;
+use crate::commands::today::*;
 
 struct Handler;
 
@@ -17,7 +19,7 @@ struct Handler;
 impl EventHandler for Handler {}
 
 #[group]
-#[commands(ping)]
+#[commands(ping, today)]
 struct General;
 
 #[tokio::main]
