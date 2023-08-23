@@ -1,3 +1,4 @@
+pub mod get;
 pub mod ping;
-pub mod today;
 pub mod random;
+pub mod today;

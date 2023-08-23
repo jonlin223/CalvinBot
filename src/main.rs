@@ -10,9 +10,10 @@ use serenity::{
 mod commands;
 mod scrapers;
 
+use crate::commands::get::*;
 use crate::commands::ping::*;
-use crate::commands::today::*;
 use crate::commands::random::*;
+use crate::commands::today::*;
 
 struct Handler;
 
@@ -20,7 +21,7 @@ struct Handler;
 impl EventHandler for Handler {}
 
 #[group]
-#[commands(ping, today, random)]
+#[commands(ping, today, random, get)]
 struct General;
 
 #[tokio::main]
