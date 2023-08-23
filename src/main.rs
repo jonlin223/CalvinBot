@@ -12,6 +12,7 @@ mod scrapers;
 
 use crate::commands::ping::*;
 use crate::commands::today::*;
+use crate::commands::random::*;
 
 struct Handler;
 
@@ -19,7 +20,7 @@ struct Handler;
 impl EventHandler for Handler {}
 
 #[group]
-#[commands(ping, today)]
+#[commands(ping, today, random)]
 struct General;
 
 #[tokio::main]
