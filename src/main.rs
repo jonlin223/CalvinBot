@@ -14,6 +14,7 @@ use crate::commands::get::*;
 use crate::commands::ping::*;
 use crate::commands::random::*;
 use crate::commands::today::*;
+use crate::commands::help::*;
 
 struct Handler;
 
@@ -21,7 +22,7 @@ struct Handler;
 impl EventHandler for Handler {}
 
 #[group]
-#[commands(ping, today, random, get)]
+#[commands(ping, today, random, get, help)]
 struct General;
 
 #[tokio::main]

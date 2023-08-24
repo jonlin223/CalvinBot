@@ -8,9 +8,8 @@ use crate::scrapers::calvin_scraper;
 
 #[command]
 async fn get(ctx: &Context, msg: &Message) -> CommandResult {
-
     let cnt = &msg.content;
-    
+
     // Must be in format !!get YYYY/MM/DD
     let n = cnt.split(' ').count();
     if n != 2 {
@@ -44,7 +43,10 @@ async fn get(ctx: &Context, msg: &Message) -> CommandResult {
     let res = calvin_scraper::scrape(url).await;
     match res {
         Some(x) => msg.reply(ctx, x).await?,
-        None => msg.reply(ctx, format!("No comic found for {date_string}")).await?,
+        None => {
+            msg.reply(ctx, format!("No comic found for {date_string}"))
+                .await?
+        }
     };
 
     Ok(())
